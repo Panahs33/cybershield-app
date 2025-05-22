@@ -1,8 +1,11 @@
-from flask import Flask, jsonify, render_template, request, session
+from flask import Flask, render_template, request, jsonify, session
 import json
+import random
 
 app = Flask(__name__)
-app.secret_key = 'supersecret'
+app.secret_key = "supersecretkey"  # Required for session handling
+
+# === ROUTES ===
 
 @app.route('/')
 def index():
@@ -11,22 +14,22 @@ def index():
 @app.route('/learn')
 def learn():
     facts = [
-    "⚠️ Over 90% of cyber attacks begin with phishing, making it the #1 threat vector.",
-    "🔍 Always inspect the full URL — attackers often mimic domains using subtle typos.",
-    "🔐 Just because a site uses HTTPS doesn't mean it's safe. Phishing sites can use HTTPS too.",
-    "📬 Generic greetings like 'Dear Customer' indicate bulk email phishing tactics.",
-    "🧠 Phishing emails often exploit urgency and fear to trick victims into clicking.",
-    "📈 Spear phishing is a targeted attack that uses your personal info against you.",
-    "🤖 AI-based phishing detectors analyze language patterns, timing, and sender behavior.",
-    "📎 Never open attachments from unknown sources — malware is often hidden in .exe or .zip files.",
-    "💼 Business Email Compromise (BEC) targets executives and can lead to large-scale fraud.",
-    "🔄 Phishing emails are often sent from lookalike domains like amaz0n.com or paypa1.com.",
-    "🚫 Don't trust emails asking for urgent wire transfers or login verification without confirmation.",
-    "📱 Phishing isn't just on email — it can also come via SMS (smishing) or phone calls (vishing).",
-    "🎓 Security awareness training reduces phishing click rates by over 70% in educated organizations.",
-    "📊 Attackers often research social media and company org charts to personalize phishing attacks.",
-    "🛑 If in doubt — stop and report. Reporting phishing helps protect the whole network."
-]
+        "Phishing emails often use urgent language to pressure you.",
+        "Hovering over links shows the true destination.",
+        "AI tools like PhishHaven detect subtle behavior anomalies.",
+        "HTTPS alone doesn't guarantee a site is safe.",
+        "Generic greetings like 'Dear Customer' are red flags.",
+        "Misspelled domains (e.g. paypa1.com) are suspicious.",
+        "Unsolicited attachments may contain malware.",
+        "Legitimate companies rarely request sensitive info via email.",
+        "Phishing sites often look pixel-perfect to mimic real ones.",
+        "AI can detect patterns human reviewers miss.",
+        "Look out for slight domain name variations (like amaz0n.com).",
+        "Urgent subject lines are commonly used in phishing.",
+        "Don't trust emails asking to reset your password unexpectedly.",
+        "AI can learn what a user's normal behavior looks like.",
+        "Phishing costs businesses billions yearly in data loss."
+    ]
     return render_template('learn.html', facts=facts)
 
 @app.route('/select')
@@ -35,28 +38,52 @@ def select_level():
 
 @app.route('/quiz/<level>')
 def quiz(level):
-    session['score'] = 0
     return render_template('quiz.html', level=level)
-
-import random
 
 @app.route('/get_questions/<level>')
 def get_questions(level):
     with open('static/questions.json') as f:
         data = json.load(f)
     questions = data.get(level, [])
-    random.shuffle(questions)
-
-    
     for q in questions:
-        if 'options' in q:
-            random.shuffle(q['options'])
-
+        random.shuffle(q["options"])
+    random.shuffle(questions)
     return jsonify(questions)
+
 @app.route('/save_score', methods=['POST'])
 def save_score():
     session['score'] = request.json.get('score', 0)
     return ('', 204)
 
+@app.route('/get_score')
+def get_score():
+    return jsonify({'score': session.get('score', 0)})
+
+# === NEW: PHISHING EMAIL CHECKER ===
+
+@app.route('/analyze', methods=['GET', 'POST'])
+def analyze():
+    result = None
+    if request.method == 'POST':
+        email = request.form['email']
+        result = analyze_email(email)
+    return render_template('analyze.html', result=result)
+
+def analyze_email(text):
+    suspicious_keywords = [
+        'urgent', 'verify your account', 'click here', 'login now',
+        'wire transfer', 'password expired', 'unusual activity',
+        'account locked', 'confirm billing', 'security alert',
+        'reactivate', 'suspicious', 'reset password', 'payment required'
+    ]
+    score = sum(1 for word in suspicious_keywords if word in text.lower())
+    if score >= 3:
+        return "❌ This message contains multiple phishing red flags."
+    elif score >= 1:
+        return "⚠️ Slightly suspicious. Review carefully."
+    else:
+        return "✅ No obvious phishing signs detected."
+
+# === START APP ===
 if __name__ == '__main__':
     app.run(debug=True)

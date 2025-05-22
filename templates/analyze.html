@@ -1,29 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>Email Phishing Checker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    .analyze-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .analyze-box {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 2rem;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(106, 13, 173, 0.4);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 10px;
+      border: none;
+      resize: vertical;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .result-box {
+      background-color: #222;
+      border-left: 4px solid #6a0dad;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      color: white;
+    }
+
+    .analyze-box h2 {
+      color: white;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    label {
+      color: #ccc;
+      font-weight: bold;
+    }
+
+    .form-btn {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 1rem;
+      border-radius: 12px;
+      background: linear-gradient(to right, #6a0dad, #8b0000);
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .form-btn:hover {
+      background: linear-gradient(to right, #8b0000, #6a0dad);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
-<body class="app-body learn-body">
-  <div class="quiz-card">
-    <h2>📩 Check an Email</h2>
-    <form method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
-      <label><strong>Email Content:</strong></label>
-      <textarea name="email" placeholder="Paste suspicious email content here..." rows="8" required></textarea>
+<body class="app-body">
+  <div class="analyze-container">
+    <div class="analyze-box">
+      <h2>📩 Check an Email</h2>
+      <form method="POST">
+        <label for="email">Email Content:</label>
+        <textarea name="email" rows="8" placeholder="Paste suspicious email content here..." required></textarea>
 
-      <label><strong>Optional Email Headers:</strong></label>
-      <textarea name="headers" placeholder="Paste full email headers here..." rows="6"></textarea>
+        <label for="headers" style="margin-top: 1rem;">Optional Email Headers:</label>
+        <textarea name="headers" rows="6" placeholder="Paste full email headers here..."></textarea>
 
-      <button class="welcome-button" type="submit">Analyze</button>
-    </form>
+        <button type="submit" class="form-btn">Analyze</button>
+      </form>
 
-    {% if result %}
-      <div class="result-box" style="margin-top: 2rem;">
-        <p>{{ result|safe }}</p>
-      </div>
-    {% endif %}
+      {% if result %}
+        <div class="result-box">{{ result|safe }}</div>
+      {% endif %}
 
-    <a href="/" class="welcome-button back-button">← Back to Home</a>
+      <a href="/" class="welcome-button back-button" style="margin-top: 1.5rem; display: block; text-align: center;">← Back to Home</a>
+    </div>
   </div>
 </body>
 </html>

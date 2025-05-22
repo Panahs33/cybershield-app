@@ -139,7 +139,7 @@ def analyze_email(text, headers=""):
     else:
         status = "✅ No major phishing signs detected."
 
-    return f"<strong>{status}</strong><br><br>" + "<br>".join(issues) if issues else statu
+    return f"<strong>Status</strong><br> • " + "<br>• ".join(issues) if issues else status
 
 # === START APP ===
 if __name__ == '__main__':

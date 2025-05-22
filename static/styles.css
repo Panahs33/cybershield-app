@@ -1,0 +1,363 @@
+/* === Base App Styling === */
+body,
+.app-body {
+  background: url('/static/background.png') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #000; /* fallback */
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* === Logo Styling === */
+.logo-img {
+  max-width: 260px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15));
+}
+
+/* === Welcome Page === */
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  padding-top: 8vh;
+  gap: 2rem;
+  text-align: center;
+}
+
+.welcome-buttons {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.welcome-button {
+  background: linear-gradient(145deg, #6a0dad, #8b0000);
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 1.2rem;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.welcome-button:hover {
+  transform: translateY(-5px);
+  background: #8b0000;
+  box-shadow: 0 10px 25px rgba(139, 0, 0, 0.5);
+}
+
+/* === Quiz Page === */
+.quiz-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 2rem;
+}
+
+.quiz-card {
+  background: rgba(0, 0, 0, 0.9);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 0 30px rgba(106, 13, 173, 0.4);
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.option-btn {
+  background-color: #6a0dad;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option-btn:hover {
+  background-color: #8b0000;
+}
+
+.option-btn.correct {
+  background-color: #28a745;
+}
+
+.option-btn.incorrect {
+  background-color: #dc3545;
+}
+
+.quiz-feedback {
+  margin: 1rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.quiz-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  margin-top: 2rem;
+}
+
+.next-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #6a0dad;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.next-button:hover {
+  background-color: #8b0000;
+}
+
+.question-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.quiz-summary {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* === Learn Page === */
+.learn-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.scroll-vertical-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.fact-card {
+  background: #1e1e1e;
+  color: #fff;
+  padding: 1.2rem;
+  border-left: 5px solid #6a0dad;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px rgba(106, 13, 173, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.fact-card:hover {
+  transform: scale(1.02);
+}
+
+/* === Quiz Select Page === */
+.quiz-select-container {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.quiz-card {
+  background: rgba(30, 30, 30, 0.95);
+  padding: 2rem;
+  width: 260px;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  box-shadow: 0 0 15px rgba(106, 13, 173, 0.5);
+  transition: all 0.3s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px #8b0000;
+}
+
+.quiz-card.beginner {
+  border-left: 5px solid #8b0000;
+}
+
+.quiz-card.informed {
+  border-left: 5px solid #6a0dad;
+}
+
+/* === Animations === */
+.quiz-card,
+.fact-card,
+.quiz-card.completed {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === Responsive Layout === */
+@media (max-width: 768px) {
+  .welcome-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .quiz-card {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .option-btn {
+    font-size: 1rem;
+    padding: 0.75rem;
+    width: 100%;
+  }
+
+  .quiz-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quiz-card.beginner,
+  .quiz-card.informed {
+    width: 90%;
+  }
+
+  .scroll-vertical-container {
+    max-height: 60vh;
+    padding: 1rem;
+  }
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.welcome-button.back-button {
+  margin: 3rem auto 0;
+  display: inline-block;
+  padding: 1rem 2rem;
+}
+/* === Footer Styling === */
+.footer {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 1.5rem 1rem;
+  color: #ccc;
+  background: transparent;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+/* === Smooth Learn Page Scroll === */
+.scroll-vertical-container {
+  scrollbar-width: thin;
+  scrollbar-color: #6a0dad #1e1e1e;
+  scroll-behavior: smooth;
+}
+
+/* Chrome, Edge, Safari */
+.scroll-vertical-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-vertical-container::-webkit-scrollbar-thumb {
+  background-color: #6a0dad;
+  border-radius: 10px;
+}
+
+.scroll-vertical-container::-webkit-scrollbar-track {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+}
+
+/* === Fade-in Animation on Scroll === */
+.fact-card {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s ease-in-out;
+}
+
+.fact-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.why-box {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-top: 2.5rem;
+  max-width: 700px;
+  text-align: center;
+  color: #e0e0e0;
+  font-size: 1rem;
+  box-shadow: 0 0 18px rgba(106, 13, 173, 0.25);
+  transition: all 0.4s ease-in-out;
+  backdrop-filter: blur(4px);
+}
+
+.why-box h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(106, 13, 173, 0.4);
+}
+
+.why-box p {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Optional fade-up animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

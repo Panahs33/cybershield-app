@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phishing Awareness Facts</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="app-body learn-body">
+  <div class="learn-container">
+    <h1 class="title">🔍 Facts You Should Know About Phishing</h1>
+    <div class="scroll-vertical-container">
+      {% for fact in facts %}
+      <div class="fact-card">{{ fact }}</div>
+      {% endfor %}
+    </div>
+    <a href="/" class="welcome-button back-button"> Back to Home</a>
+  </div>
+  <script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  });
+
+  document.querySelectorAll('.fact-card').forEach(card => {
+    observer.observe(card);
+  });
+</script>
+</body>
+</html>

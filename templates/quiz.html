@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phishing Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="app-body quiz-body">
+  <div class="quiz-card" id="quiz-card">
+    <!-- JS will inject question and answers -->
+  </div>
+
+  <script>
+    let questions = [];
+    let index = 0;
+    let score = 0;
+    const level = "{{ level }}";
+
+    fetch(`/get_questions/${level}`)
+      .then(res => res.json())
+      .then(data => {
+        questions = data;
+        showQuestion();
+      });
+
+    function showQuestion() {
+      const card = document.getElementById('quiz-card');
+      card.classList.remove('completed');
+      const q = questions[index];
+
+      card.innerHTML = `
+        <h2 class="question-title">${q.question}</h2>
+        <div id="options" class="quiz-options"></div>
+        <div id="feedback" class="quiz-feedback"></div>
+        <div class="quiz-footer">
+          <p id="score">Score: ${score}</p>
+          <p id="progress">Question ${index + 1} of ${questions.length}</p>
+          <button onclick="nextQuestion()" id="next-btn" class="next-button" style="display: none;">Next Question</button>
+        </div>
+      `;
+
+      const optionsDiv = document.getElementById("options");
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.className = "option-btn";
+        btn.onclick = () => handleAnswer(opt, q, btn);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(selected, question, clickedBtn) {
+      const buttons = document.querySelectorAll(".option-btn");
+      buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === question.answer) {
+          btn.classList.add("correct");
+        } else if (btn === clickedBtn) {
+          btn.classList.add("incorrect");
+        }
+      });
+
+      const feedback = selected === question.answer
+        ? `✅ <strong>Correct!</strong> Score: ${score + 1}`
+        : `❌ <strong>Wrong:</strong> ${question.explanation}`;
+
+      if (selected === question.answer) score++;
+
+      document.getElementById("feedback").innerHTML = feedback;
+      document.getElementById("score").textContent = `Score: ${score}`;
+      document.getElementById("next-btn").style.display = "block";
+    }
+
+    function nextQuestion() {
+      index++;
+      if (index >= questions.length) {
+        const card = document.getElementById("quiz-card");
+        card.classList.add("completed");
+        card.innerHTML = `
+          <h2 class="question-title">🎉 Quiz Completed!</h2>
+          <p class="quiz-summary">You scored <strong>${score}</strong> out of <strong>${questions.length}</strong>.</p>
+          <a href="/select" class="welcome-button">🔁 Try Another Level</a>
+        `;
+      } else {
+        showQuestion();
+      }
+    }
+  </script>
+</body>
+</html>

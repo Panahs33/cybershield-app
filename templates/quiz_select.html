@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Difficulty</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="app-body quiz-select-body">
+  <div class="quiz-select-container">
+    <h1 class="title">🧪 Choose Your Quiz Level</h1>
+    <div class="card-container">
+      <a href="/quiz/beginner" class="quiz-card beginner">
+        <h2>🧠 Beginner</h2>
+        <p>New to phishing? Start here.</p>
+      </a>
+      <a href="/quiz/informed" class="quiz-card informed">
+        <h2>🕵️ Informed User</h2>
+        <p>Think you know phishing? Prove it.</p>
+      </a>
+    </div>
+    <a href="/" class="welcome-button back-button"> Back to Home</a>
+  </div>
+</body>
+</html>

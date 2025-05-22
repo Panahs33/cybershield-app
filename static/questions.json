@@ -1,0 +1,126 @@
+{
+  "beginner": [
+    {
+      "question": "Which of the following is a common sign of a phishing email?",
+      "options": ["Official email address", "Spelling mistakes and urgency", "Greeting by your full name", "HTTPS in the URL"],
+      "answer": "Spelling mistakes and urgency",
+      "explanation": "Phishing emails often include typos and push urgency to get you to act without thinking."
+    },
+    {
+      "question": "What should you do if a link in an email looks suspicious?",
+      "options": ["Click it to check", "Forward to a friend", "Hover to preview the URL", "Reply to the sender"],
+      "answer": "Hover to preview the URL",
+      "explanation": "Hovering over the link lets you see the true destination - a critical anti-phishing step."
+    },
+    {
+      "question": "Why do phishing emails often use generic greetings like 'Dear Customer'?",
+      "options": ["They don't know your name", "It sounds formal", "They want to appear friendly", "They copy official templates"],
+      "answer": "They don't know your name",
+      "explanation": "Attackers send bulk emails and don't have personal info, so they use vague greetings."
+    },
+    {
+      "question": "What kind of files should you be cautious of in email attachments?",
+      "options": [".jpg", ".txt", ".exe", ".pdf"],
+      "answer": ".exe",
+      "explanation": "Executable files can install malware - never open these unless you're absolutely sure they're safe."
+    },
+    {
+      "question": "Which domain looks suspicious?",
+      "options": ["paypal.com", "paypa1.com", "paypal.co.uk", "paypal.support"],
+      "answer": "paypa1.com",
+      "explanation": "Phishing attackers often use domains with subtle typos like '1' instead of 'l'."
+    },
+    {
+      "question": "Which is safest to do when you're unsure about an email?",
+      "options": ["Open it anyway", "Click all the links to test", "Delete it immediately", "Report it to your IT team"],
+      "answer": "Report it to your IT team",
+      "explanation": "Always report suspicious emails to your security team - don't just delete them."
+    },
+    {
+      "question": "Is it safe to trust an email just because it uses HTTPS?",
+      "options": ["Yes", "No", "Only if it's green", "Only if it has a lock icon"],
+      "answer": "No",
+      "explanation": "Phishing sites can also use HTTPS - always check the full domain name too."
+    },
+    {
+      "question": "What should raise suspicion in a work-related email?",
+      "options": ["Request for urgent wire transfer", "Normal project update", "HR newsletter", "Team lunch invite"],
+      "answer": "Request for urgent wire transfer",
+      "explanation": "Requests for money or account access under pressure are classic phishing red flags."
+    },
+    {
+      "question": "What is phishing?",
+      "options": ["A type of fish", "A security tool", "An attempt to trick you into giving up personal info", "A browser update"],
+      "answer": "An attempt to trick you into giving up personal info",
+      "explanation": "Phishing is a scam that tries to steal data by impersonating legitimate services."
+    },
+    {
+      "question": "What does the 'From' email field sometimes hide?",
+      "options": ["Personal info", "Malicious intentions", "Spoofed domains", "Real names"],
+      "answer": "Spoofed domains",
+      "explanation": "Attackers can fake the sender's address - always inspect the full email domain."
+    }
+  ],
+  "informed": [
+    {
+      "question": "How does AI improve phishing detection?",
+      "options": ["It guesses randomly", "It memorizes spam", "It finds behavior anomalies", "It blocks all emails"],
+      "answer": "It finds behavior anomalies",
+      "explanation": "AI learns normal patterns and detects abnormal behavior - making it effective at spotting phishing."
+    },
+    {
+      "question": "Why is phishing hard to detect for trained users?",
+      "options": ["It uses slang", "It copies trusted brands perfectly", "It comes at night", "It's handwritten"],
+      "answer": "It copies trusted brands perfectly",
+      "explanation": "Sophisticated phishing emails mimic real designs and domains with near-perfect accuracy."
+    },
+    {
+      "question": "What's a drawback of using AI for phishing detection?",
+      "options": ["It's always wrong", "False positives/negatives", "Too slow", "Needs no training"],
+      "answer": "False positives/negatives",
+      "explanation": "Even good AI can flag legit emails or miss threats - human judgment is still important."
+    },
+    {
+      "question": "Why do phishing attackers use subdomains (e.g. login.bank.fake.com)?",
+      "options": ["To save money", "To avoid spam filters", "To trick users", "To use HTTPS"],
+      "answer": "To trick users",
+      "explanation": "They hope you only read the first part like 'login.bank' and miss the real domain at the end."
+    },
+    {
+      "question": "Which type of attack uses personalized phishing based on your data?",
+      "options": ["Generic phishing", "Whaling", "Vishing", "Spear phishing"],
+      "answer": "Spear phishing",
+      "explanation": "Spear phishing targets individuals using personal info - it's more convincing and dangerous."
+    },
+    {
+      "question": "What should raise alarms in an email claiming to be from your CEO?",
+      "options": ["Friendly greeting", "Unusual grammar", "Request for credentials", "Project update"],
+      "answer": "Request for credentials",
+      "explanation": "Urgent credential requests are classic phishing - even if the email looks like your CEO."
+    },
+    {
+      "question": "Why do phishing campaigns avoid heavy images and long scripts?",
+      "options": ["To load faster", "To look legit", "To beat firewalls", "To avoid detection"],
+      "answer": "To avoid detection",
+      "explanation": "Simpler emails are harder to detect by AI spam filters."
+    },
+    {
+      "question": "How can a phishing email bypass detection systems?",
+      "options": ["Use emojis", "Use short text", "Use new domains", "Use green text"],
+      "answer": "Use new domains",
+      "explanation": "New domains aren't on blacklists yet, giving attackers a temporary advantage."
+    },
+    {
+      "question": "What does AI-based anomaly detection depend on?",
+      "options": ["Magic", "Random guessing", "Patterns in user behavior", "Changing logos"],
+      "answer": "Patterns in user behavior",
+      "explanation": "AI watches for deviations in how emails or users behave."
+    },
+    {
+      "question": "Why is user education still vital even with advanced tech?",
+      "options": ["Because AI is perfect", "Because users like it", "Because humans still fall for scams", "Because phishing stopped"],
+      "answer": "Because humans still fall for scams",
+      "explanation": "AI helps, but phishing relies on human error - which only education can fix."
+    }
+  ]
+}

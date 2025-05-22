@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CyberShield Learn</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="app-body welcome-body">
+
+  <div class="welcome-container">
+
+    <!-- Logo -->
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="CyberShield Learn Logo" class="logo-img" />
+
+    <!-- Tagline -->
+    <p class="tagline">
+      Learn how to spot phishing attempts and test your skills with our interactive quiz.
+    </p>
+
+    <!-- Buttons -->
+    <div class="welcome-buttons">
+      <a href="{{ url_for('learn') }}" class="welcome-button">📘 Explore Phishing Facts</a>
+      <a href="{{ url_for('select_level') }}" class="welcome-button">🧠 Take the Quiz</a>
+    </div>
+
+    <!-- Why Cyber Awareness Box -->
+    <div class="why-box fade-in">
+      <h3>🔒 Why Cyber Awareness?</h3>
+      <p><strong>Cybercriminals don't hack in — they log in.</strong> Don't be the weak link. Learn how to defend yourself through awareness.</p>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    © 2025 CyberShield Learn. All rights reserved.
+  </footer>
+
+</body>
+</html>

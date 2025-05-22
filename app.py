@@ -65,24 +65,81 @@ def get_score():
 def analyze():
     result = None
     if request.method == 'POST':
-        email = request.form['email']
-        result = analyze_email(email)
+        email_text = request.form['email']
+        headers = request.form.get('headers', '')
+        result = analyze_email(email_text, headers)
     return render_template('analyze.html', result=result)
 
-def analyze_email(text):
-    suspicious_keywords = [
-        'urgent', 'verify your account', 'click here', 'login now',
-        'wire transfer', 'password expired', 'unusual activity',
-        'account locked', 'confirm billing', 'security alert',
-        'reactivate', 'suspicious', 'reset password', 'payment required'
+def analyze_email(text, headers=""):
+    import re
+    score = 0
+    issues = []
+
+    text = text.lower()
+
+    # --- 1. Suspicious Keywords ---
+    keywords = [
+        "urgent", "verify your account", "click here", "login now", "update payment",
+        "account locked", "unusual activity", "security alert", "reset password", "wire transfer"
     ]
-    score = sum(1 for word in suspicious_keywords if word in text.lower())
-    if score >= 3:
-        return "❌ This message contains multiple phishing red flags."
-    elif score >= 1:
-        return "⚠️ Slightly suspicious. Review carefully."
+    for kw in keywords:
+        if kw in text:
+            score += 1
+            issues.append(f"Keyword match: <b>{kw}</b>")
+
+    # --- 2. Threats ---
+    threats = [
+        "your account will be closed", "final notice", "act immediately", "will be terminated"
+    ]
+    for t in threats:
+        if t in text:
+            score += 1
+            issues.append(f"Threatening tone: <b>{t}</b>")
+
+    # --- 3. Suspicious Links ---
+    links = re.findall(r'https?://[^\s<>"]+|www\.[^\s<>"]+', text)
+    for link in links:
+        if "bit.ly" in link or "tinyurl" in link or re.search(r'\d+\.\d+\.\d+\.\d+', link):
+            score += 1
+            issues.append(f"Suspicious link: <code>{link}</code>")
+
+    # --- 4. Generic Greetings ---
+    if "dear customer" in text or "dear user" in text:
+        score += 1
+        issues.append("Generic greeting detected")
+
+    # === HEADER ANALYSIS ===
+    headers = headers.lower()
+
+    if headers:
+        if "reply-to:" in headers and "from:" in headers:
+            from_match = re.search(r"from:\s*(.+)", headers)
+            reply_match = re.search(r"reply-to:\s*(.+)", headers)
+            if from_match and reply_match and from_match.group(1) != reply_match.group(1):
+                score += 1
+                issues.append(f"<b>Mismatch</b> between <code>From</code> and <code>Reply-To</code> addresses")
+
+        if "spf=fail" in headers or "dmarc=fail" in headers or "dkim=fail" in headers:
+            score += 1
+            issues.append("Email failed SPF/DKIM/DMARC checks")
+
+        if "received:" in headers:
+            received_count = headers.count("received:")
+            if received_count > 5:
+                issues.append("Multiple 'Received:' lines — may be relayed")
+            if "unknown" in headers or "dynamic" in headers:
+                score += 1
+                issues.append("Header shows possibly spoofed server (unknown/dynamic)")
+
+    # === RESULT FORMAT ===
+    if score >= 4:
+        status = "❌ High phishing risk!"
+    elif score >= 2:
+        status = "⚠️ Suspicious content found."
     else:
-        return "✅ No obvious phishing signs detected."
+        status = "✅ No major phishing signs detected."
+
+    return f"<strong>{status}</strong><br><br>" + "<br>".join(issues) if issues else statu
 
 # === START APP ===
 if __name__ == '__main__':

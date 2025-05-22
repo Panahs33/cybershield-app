@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Phishing Email Checker</title>
+  <title>Email Phishing Checker</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body class="app-body learn-body">
-  <div class="learn-container">
-    <h1 class="title">📩 Phishing Email Checker</h1>
-    <form method="post">
-      <textarea name="email" rows="10" placeholder="Paste the email content here..." required></textarea>
-      <br>
-      <button type="submit" class="welcome-button">Analyze Email</button>
+  <div class="quiz-card">
+    <h2>📩 Check an Email</h2>
+    <form method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+      <label><strong>Email Content:</strong></label>
+      <textarea name="email" placeholder="Paste suspicious email content here..." rows="8" required></textarea>
+
+      <label><strong>Optional Email Headers:</strong></label>
+      <textarea name="headers" placeholder="Paste full email headers here..." rows="6"></textarea>
+
+      <button class="welcome-button" type="submit">Analyze</button>
     </form>
+
     {% if result %}
-    <div class="result-box">
-      <p>{{ result }}</p>
-    </div>
+      <div class="result-box" style="margin-top: 2rem;">
+        <p>{{ result|safe }}</p>
+      </div>
     {% endif %}
-    <a href="/" class="welcome-button back-button">🏠 Back to Home</a>
+
+    <a href="/" class="welcome-button back-button">← Back to Home</a>
   </div>
 </body>
 </html>

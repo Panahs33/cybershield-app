@@ -417,3 +417,30 @@ body,
     font-size: 1.5rem;
   }
 }
+textarea {
+  width: 100%;
+  max-width: 600px;
+  padding: 1rem;
+  border-radius: 10px;
+  border: none;
+  resize: vertical;
+  font-size: 1rem;
+  margin: 1rem auto;
+  display: block;
+  background-color: #1e1e1e;
+  color: white;
+  box-shadow: 0 0 10px rgba(106, 13, 173, 0.3);
+}
+
+.result-box {
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
+  border-left: 5px solid #6a0dad;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  color: white;
+  max-width: 600px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(106, 13, 173, 0.25);
+}

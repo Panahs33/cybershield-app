@@ -3,9 +3,9 @@ import json
 import random
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"  # Required for session handling
+app.secret_key = "supersecretkey"  
 
-# === ROUTES ===
+
 
 @app.route('/')
 def index():
@@ -59,7 +59,7 @@ def save_score():
 def get_score():
     return jsonify({'score': session.get('score', 0)})
 
-# === NEW: PHISHING EMAIL CHECKER ===
+
 
 @app.route('/analyze', methods=['GET', 'POST'])
 def analyze():
@@ -77,7 +77,7 @@ def analyze_email(text, headers=""):
 
     text = text.lower()
 
-    # --- 1. Suspicious Keywords ---
+    
     keywords = [
         "urgent", "verify your account", "click here", "login now", "update payment",
         "account locked", "unusual activity", "security alert", "reset password", "wire transfer"
@@ -87,7 +87,7 @@ def analyze_email(text, headers=""):
             score += 1
             issues.append(f"Keyword match: <b>{kw}</b>")
 
-    # --- 2. Threats ---
+    
     threats = [
         "your account will be closed", "final notice", "act immediately", "will be terminated"
     ]
@@ -96,19 +96,19 @@ def analyze_email(text, headers=""):
             score += 1
             issues.append(f"Threatening tone: <b>{t}</b>")
 
-    # --- 3. Suspicious Links ---
+    
     links = re.findall(r'https?://[^\s<>"]+|www\.[^\s<>"]+', text)
     for link in links:
         if "bit.ly" in link or "tinyurl" in link or re.search(r'\d+\.\d+\.\d+\.\d+', link):
             score += 1
             issues.append(f"Suspicious link: <code>{link}</code>")
 
-    # --- 4. Generic Greetings ---
+    
     if "dear customer" in text or "dear user" in text:
         score += 1
         issues.append("Generic greeting detected")
 
-    # === HEADER ANALYSIS ===
+    
     headers = headers.lower()
 
     if headers:
@@ -131,7 +131,7 @@ def analyze_email(text, headers=""):
                 score += 1
                 issues.append("Header shows possibly spoofed server (unknown/dynamic)")
 
-    # === RESULT FORMAT ===
+    
     if score >= 4:
         status = "❌ High phishing risk!"
     elif score >= 2:
@@ -141,6 +141,6 @@ def analyze_email(text, headers=""):
 
     return f"<strong>Status</strong><br> • " + "<br>• ".join(issues) if issues else status
 
-# === START APP ===
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -143,7 +143,7 @@ body,
   margin-bottom: 1.5rem;
 }
 
-/* === Learn Page === */
+
 .learn-container {
   max-width: 800px;
   margin: 0 auto;
@@ -175,7 +175,7 @@ body,
   transform: scale(1.02);
 }
 
-/* === Quiz Select Page === */
+
 .quiz-select-container {
   text-align: center;
   padding: 3rem 2rem;
@@ -214,7 +214,7 @@ body,
   border-left: 5px solid #6a0dad;
 }
 
-/* === Animations === */
+
 .quiz-card,
 .fact-card,
 .quiz-card.completed {
@@ -226,7 +226,6 @@ body,
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* === Responsive Layout === */
 @media (max-width: 768px) {
   .welcome-buttons {
     flex-direction: column;
@@ -276,7 +275,7 @@ body,
   display: inline-block;
   padding: 1rem 2rem;
 }
-/* === Footer Styling === */
+
 .footer {
   text-align: center;
   font-size: 0.9rem;
@@ -286,14 +285,14 @@ body,
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
-/* === Smooth Learn Page Scroll === */
+
 .scroll-vertical-container {
   scrollbar-width: thin;
   scrollbar-color: #6a0dad #1e1e1e;
   scroll-behavior: smooth;
 }
 
-/* Chrome, Edge, Safari */
+
 .scroll-vertical-container::-webkit-scrollbar {
   width: 8px;
 }
@@ -308,7 +307,7 @@ body,
   border-radius: 10px;
 }
 
-/* === Fade-in Animation on Scroll === */
+
 .fact-card {
   opacity: 0;
   transform: translateY(10px);
@@ -347,7 +346,7 @@ body,
   font-weight: 300;
 }
 
-/* Optional fade-up animation */
+
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
